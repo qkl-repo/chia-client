@@ -154,10 +154,17 @@ class Wallet extends RpcClient {
     return transaction;
   }
 
-  public async getTransactions(walletId: string, limit: number): Promise<Transaction[]> {
+  public async getTransactions(walletId: string, 
+                               start: number, 
+                               end: number
+                               reverse: boolean): Promise<Transaction[]> {
     const { transactions } = await this.request<TransactionsResponse>(
       "get_transactions",
-      { wallet_id: walletId, end: limit }
+      { wallet_id: walletId, 
+       start,
+       end,
+       reverse
+      }
     );
 
     return transactions;
